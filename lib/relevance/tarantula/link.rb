@@ -68,11 +68,13 @@ module Relevance
 
       def method
         @method ||= begin
-                      (@tag &&
-                       [:put, :delete, :post].detect do |m| # post should be last since it's least specific
-                        @tag['onclick'] =~ METHOD_REGEXPS[m]
-                       end) ||
-                         :get
+                      (
+                        @tag &&
+                        [:put, :delete, :post].detect do |m| # post should be last since it's least specific
+                          @tag['onclick'] =~ METHOD_REGEXPS[m] ||
+                          @tag['data-method'] == m.to_s
+                        end
+                      ) || :get
                     end
       end
 
