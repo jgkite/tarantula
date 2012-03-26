@@ -1,4 +1,5 @@
 require 'rake'
+require 'rake/testtask'
 
 namespace :tarantula do
 
